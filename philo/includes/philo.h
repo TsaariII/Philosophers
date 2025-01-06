@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:53:29 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/04 13:40:09 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/06 11:30:43 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <pthread.h>
 # include <sys/time.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_philo
 {
@@ -38,7 +42,13 @@ typedef struct s_data
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	*locks;
 	long			start;
-}
+}	t_data;
 
+	/*init.c*/
 
+t_data	*init_data(int num, char **values);
+
+	/*error.c*/
+
+int	informer(void);
 #endif

@@ -2,7 +2,9 @@ NAME = philo
 
 SRC_DIR = sources/
 
-SRC = $(SRC_DIR)main.c\
+SRC =	$(SRC_DIR)main.c\
+		$(SRC_DIR)init.c\
+		$(SRC_DIR)error.c\
 
 
 FLAGS = -Wall -Werror -Wextra -g
@@ -25,7 +27,6 @@ $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 
 clean:
 		@rm -rf $(OBJ_DIR)
-		@make -C $(LIBFT_DIR) clean
 
 fclean: clean
 		@rm -f $(NAME)
