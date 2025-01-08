@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 10:49:36 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:58:34 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ t_data	*init_data(int num, char **args)
 		return (NULL);
 	}
 	if (set_the_table(data))
-		return (1);
+		return (NULL);
 	if (create_philos(data))
-		return (1);
+		return (NULL);
 	return (data);
 }

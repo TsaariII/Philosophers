@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:51:26 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/07 14:00:29 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:59:17 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	main(int argc, char **argv)
 	data = init_data(argc, argv);
 	if (!data)
 		return (1);
-	to_simulation(data);
+	// to_simulation(data);
 	return (0);
 }
