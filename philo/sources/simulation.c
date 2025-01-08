@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/03 09:51:26 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/07 14:00:29 by nzharkev         ###   ########.fr       */
+/*   Created: 2025/01/07 14:01:28 by nzharkev          #+#    #+#             */
+/*   Updated: 2025/01/07 14:08:52 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	main(int argc, char **argv)
+int	to_simulation(t_data *data)
 {
-	t_data	*data;
+	t_philo	*philos;
 
-	if (argc < 5 || argc > 6)
-		return (informer());
-	data = init_data(argc, argv);
-	if (!data)
+	philos = init_philo(philos);
+	if (!philos)
+	{
+		free(data);
 		return (1);
-	to_simulation(data);
+	}
 	return (0);
 }

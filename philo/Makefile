@@ -24,7 +24,7 @@ $(OBJ_DIRS):
 
 $(OBJ_DIR)%.o:$(SRC_DIR)%.c
 		@cc $(FLAGS) $(LIBFT_INC) -c $< -o $@
-
+		
 clean:
 		@rm -rf $(OBJ_DIR)
 

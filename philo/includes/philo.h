@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:53:29 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/06 11:30:43 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:15:07 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,27 @@ typedef struct s_data
 	int				time_sleep;
 	int 			meals;
 	int				running;
+	int				start;
+	t_philo			*philos;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	*locks;
-	long			start;
+	pthread_mutex_t	lock;
 }	t_data;
+
+	/*error.c*/
+
+int	informer(void);
 
 	/*init.c*/
 
 t_data	*init_data(int num, char **values);
 
-	/*error.c*/
+	/*simulation.c*/
 
-int	informer(void);
+int	to_simulation(t_data *data);
+
+	/*utils.c*/
+int	str_to_int(char *str);
+int	is_this_sign(char *str);
+int	only_digit(char c);
+
 #endif

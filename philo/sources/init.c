@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/06 11:53:58 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 10:49:36 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,46 +22,56 @@ int	missing_value(t_data *data, int num)
 	return (0);
 }
 
-int	only_digit(char c)
+void	the_philo(t_data *data, t_philo *philo, int chair)
 {
-	if (c >= '0' && c <= '9')
-		return (0);
-	return (1);
+	philo->data = data;
+	philo->l_fork = &data->forks[chair];
+	philo->r_fork = &data->forks[(chair + 1) % data->num_philo];
+	philo->id = chair + 1;
+	philo->last_meal = 0;
+	philo->meals = 0;
 }
 
-int	is_this_sign(char *str)
+int	create_philos(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	if (str[0] == '-' || str[0] == '+')
-		return (0);
-	while (str[i])
+
+	data->philos = malloc(sizeof(t_philo) * data->num_philo);
+	if (!data->philos)
 	{
-		if (only_digit(str[i]))
-			return (0);
+		free(data->forks);
+		return (1);
+	}
+	while (i < data->num_philo)
+	{
+		the_philo(data, &data->philos[i], i);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
-int	str_to_int(char *str)
+int	set_the_table(t_data *data)
 {
-	long long int	res;
-	int				i;
+	int	i;
 
 	i = 0;
-	res = 0;
-	if (!is_this_sign(str))
-		return (0);
-	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	if (pthread_mutex_init(&data->lock, NULL))
+		return (1);
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);
+	while (i < data->num_philo)
 	{
-		res = res * 10 + (str[i] - 48);
-		if (res > INT_MAX)
-			return (0);
+		if (pthread_mutex_init(&data->forks[i], NULL))
+		{
+			while (i > 0)
+				pthread_mutex_destroy(&data->forks[i--]);
+			pthread_mutex_destroy(&data->lock);
+			free(data->forks);
+		}
 		i++;
 	}
-	return ((int)res);
+	return (0);
 }
 
 t_data	*init_data(int num, char **args)
@@ -83,5 +93,9 @@ t_data	*init_data(int num, char **args)
 		informer();
 		return (NULL);
 	}
+	if (set_the_table(data))
+		return (1);
+	if (create_philos(data))
+		return (1);
 	return (data);
 }
