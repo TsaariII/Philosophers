@@ -6,21 +6,11 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 10:58:34 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:49:25 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-int	missing_value(t_data *data, int num)
-{
-	if (data->num_philo == 0 || data->time_death == 0 || data->time_eat == 0
-		|| data->time_sleep == 0)
-		return (1);
-	if (num == 6 && data->meals == 0)
-		return (1);
-	return (0);
-}
 
 void	the_philo(t_data *data, t_philo *philo, int chair)
 {
@@ -71,6 +61,16 @@ int	set_the_table(t_data *data)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	missing_value(t_data *data, int num)
+{
+	if (data->num_philo == 0 || data->time_death == 0 || data->time_eat == 0
+		|| data->time_sleep == 0)
+		return (1);
+	if (num == 6 && data->meals == 0)
+		return (1);
 	return (0);
 }
 

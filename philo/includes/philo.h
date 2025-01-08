@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:53:29 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/07 16:15:07 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 11:31:55 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 
 typedef struct s_philo
 {
-	int		id;
-	int		meals;
-	long	last_meal;
+	int				id;
+	int				meals;
+	long			last_meal;
+	pthread_t		thread;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	struct s_data	*data;
-
 } t_philo;
 
 typedef struct s_data
@@ -55,7 +55,7 @@ t_data	*init_data(int num, char **values);
 
 	/*simulation.c*/
 
-int	to_simulation(t_data *data);
+void	to_simulation(t_data *data);
 
 	/*utils.c*/
 int	str_to_int(char *str);
