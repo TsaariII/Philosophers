@@ -5,54 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/07 14:01:28 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 11:48:32 by nzharkev         ###   ########.fr       */
+/*   Created: 2025/01/08 13:22:23 by nzharkev          #+#    #+#             */
+/*   Updated: 2025/01/08 15:52:32 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	*day(void *arg)
+int	starving_philo(t_data *data)
 {
-	t_philo	*philo;
+	size_t	time;
+	int		i;
 
-	philo = (t_philo *)arg;
-
-	pthread_mutex_lock(&philo->data->lock);
-	pthread_mutex_unlock(&philo->data->lock);
-	if (philo->data->num_philo == 1);
-	{
-		just_one(philo);
-		return (philo);
-	}
-	no_fork(philo);
-	while (!the_end(philo))
-	{
-		if (eat(philo))
-			break ;
-		if (time_to_sleep(philo))
-			break ;
-		if (!the_end(philo))
-			printf("is thinking");
-		else
-			break ;
-	}
-	return (philo);
-}
-
-void	to_simulation(t_data *data)
-{
-	int	i;
-
-	pthread_mutex_lock(&data->lock);
 	i = 0;
 	while (i < data->num_philo)
 	{
-		if (pthread_create(&data->philos[i].thread, NULL, &day, (void *)&data->philos[i]))
+		pthread_mutex_lock(&data->lock);
+		if (data->running  == 0)
 		{
-			printf("FAIL\n");
+			time = what_time() - data->start;
+			if (time - data->philos[i].last_meal > data->time_eat)
+			{
+				pthread_mutex_unlock(&data->lock);
+				document_moment(&data->philos[i], "died", 1);
+				return (1);
+			}
 		}
+		pthread_mutex_unlock(&data->lock);
 		i++;
 	}
 	return (0);
+}
+
+int	end_of_cycle(t_data *data)
+{
+	// int	philos;
+	// int	meals;
+
+	if (starving_philo(data))
+		return (1);
+	return (0);
+}
+
+void	cycle_of_extistence(t_data *data)
+{
+	while (1)
+	{
+		if (end_of_cycle(data))
+			break ;
+	}
+	unite_in_peace(data);
+	cleaner(data);
 }

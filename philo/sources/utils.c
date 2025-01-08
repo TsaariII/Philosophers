@@ -6,20 +6,20 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:28:52 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/07 14:30:10 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:00:36 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	only_digit(char c)
+static int	only_digit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (0);
 	return (1);
 }
 
-int	is_this_sign(char *str)
+static int	is_this_sign(char *str)
 {
 	int	i;
 
@@ -52,4 +52,33 @@ int	str_to_int(char *str)
 		i++;
 	}
 	return ((int)res);
+}
+
+size_t	what_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	document_moment(t_philo *philo, char *msg, int flg)
+{
+	size_t	time;
+
+	pthread_mutex_lock(&philo->data->lock);
+	if (flg)
+	{
+		philo->data->running = 0;
+		time = what_time() - philo->data->start;
+		printf("%zu %d %s\n", time, philo->id, msg);
+	}
+	if (philo->data->running == 0)
+	{
+		pthread_mutex_unlock(&philo->data->lock);
+		return ;
+	}
+	time = what_time() - philo->data->start;
+	printf("%zu %d %s\n", time, philo->id, msg);
+	pthread_mutex_unlock(&philo->data->lock);
 }

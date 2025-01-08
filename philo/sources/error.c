@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:31:01 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 11:50:04 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:21:31 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,16 @@ void	informer(void)
 	printf("\ttime_to_eat needs to at least 1\n");
 	printf("\time_to_sleep needs to at least 1\n");
 	printf("\tnumber_of_times_each_philosopher_must_eat needs to at least 1\n");
+}
+
+int	the_end(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->lock);
+	if (philo->data->running == 0)
+	{
+		pthread_mutex_unlock(&philo->data->lock);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->lock);
+	return (0);
 }

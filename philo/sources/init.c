@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 11:49:25 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:29:27 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	the_philo(t_data *data, t_philo *philo, int chair)
 {
 	philo->data = data;
-	philo->l_fork = &data->forks[chair];
-	philo->r_fork = &data->forks[(chair + 1) % data->num_philo];
+	philo->l_fork = data->forks[chair];
+	philo->r_fork = data->forks[(chair + 1) % data->num_philo];
 	philo->id = chair + 1;
 	philo->last_meal = 0;
 	philo->meals = 0;

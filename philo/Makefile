@@ -3,10 +3,13 @@ NAME = philo
 SRC_DIR = sources/
 
 SRC =	$(SRC_DIR)main.c\
+		$(SRC_DIR)actions.c\
+		$(SRC_DIR)cleaners.c\
 		$(SRC_DIR)error.c\
 		$(SRC_DIR)init.c\
-		$(SRC_DIR)utils.c\
-
+		$(SRC_DIR)routine.c\
+		$(SRC_DIR)simulation.c\
+		$(SRC_DIR)utils.c
 
 FLAGS = -Wall -Werror -Wextra -g
 

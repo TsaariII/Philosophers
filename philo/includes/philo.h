@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:53:29 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 11:31:55 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:52:41 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,42 +24,59 @@ typedef struct s_philo
 {
 	int				id;
 	int				meals;
-	long			last_meal;
+	size_t			last_meal;
 	pthread_t		thread;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	l_fork;
+	pthread_mutex_t	r_fork;
 	struct s_data	*data;
 } t_philo;
 
 typedef struct s_data
 {
 	int				num_philo;
-	int				time_death;
-	int				time_eat;
-	int				time_sleep;
-	int 			meals;
+	size_t			time_death;
+	size_t			time_eat;
+	size_t			time_sleep;
+	int				meals;
 	int				running;
-	int				start;
+	size_t			start;
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
 }	t_data;
 
+	/*actions.c*/
+
+int		eat(t_philo *philo);
+int		time_to_sleep(t_philo *philo);
+
+	/*cleaners.c*/
+
+void	cleaner(t_data *data);
+void	unite_in_peace(t_data *data);
+
 	/*error.c*/
 
-int	informer(void);
+void	informer(void);
+int		the_end(t_philo *philo);
 
 	/*init.c*/
 
 t_data	*init_data(int num, char **values);
 
+	/*routine.c*/
+
+void	cycle_of_extistence(t_data *data);
+
 	/*simulation.c*/
 
-void	to_simulation(t_data *data);
+void	create_simulation(t_data *data);
+int		standby_of_reason(t_philo *philo, size_t ms);
 
 	/*utils.c*/
-int	str_to_int(char *str);
-int	is_this_sign(char *str);
-int	only_digit(char c);
+
+int		str_to_int(char *str);
+size_t	what_time(void);
+void	document_moment(t_philo *philo, char *msg, int flg);
 
 #endif
