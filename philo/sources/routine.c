@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:01:28 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/13 10:28:39 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:11:48 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	no_fork(t_philo *philo)
 	if (philo->id % 2 == 0)
 	{
 		document_moment(philo, "is thinking", 0);
-		standby_of_reason(&philo->data->philos[0], philo->data->time_death);
+		standby_of_reason(&philo->data->philos[0], philo->data->time_eat / 2);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/09 11:01:45 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/13 11:02:09 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ int	set_the_table(t_data *data)
 	if (pthread_mutex_init(&data->lock, NULL))
 		return (1);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);
+	if (!data->forks)
+	{
+		pthread_mutex_destroy(&data->lock);
+		return (1);
+	}
 	while (i < data->num_philo)
 	{
 		if (pthread_mutex_init(&data->forks[i], NULL))
@@ -79,11 +84,12 @@ t_data	*init_data(int num, char **args)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
+	if (!data)
+		return (NULL);
 	data->num_philo = str_to_int(args[1]);
 	data->time_death = str_to_int(args[2]);
 	data->time_eat = str_to_int(args[3]);
 	data->time_sleep = str_to_int(args[4]);
-
 	if (num == 6)
 		data->meals = str_to_int(args[5]);
 	else
