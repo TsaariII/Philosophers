@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:01:28 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 15:31:41 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/13 10:28:39 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int standby_of_reason(t_philo *philo, size_t ms)
 	time = what_time();
 	while ((what_time() - time) < ms)
 	{
-		usleep(500);
+		usleep(100);
 		if (the_end(philo))
 			return (1);
 	}
@@ -30,7 +30,7 @@ void	no_fork(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
-		document_moment(philo, "thinking\n", 0);
+		document_moment(philo, "is thinking", 0);
 		standby_of_reason(&philo->data->philos[0], philo->data->time_death);
 	}
 }
@@ -41,7 +41,7 @@ void	just_one(t_philo *philo)
 
 	pthread_mutex_lock(&philo->l_fork);
 	time = philo->data->start;
-	printf("%zu %d has taken fork\n", what_time() - time, 1);
+	printf("%zu %d has taken a fork\n", what_time() - time, 1);
 	standby_of_reason(&philo->data->philos[0], philo->data->time_death);
 	pthread_mutex_unlock(&philo->l_fork);
 }
@@ -51,7 +51,6 @@ void	*day(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-
 	pthread_mutex_lock(&philo->data->lock);
 	pthread_mutex_unlock(&philo->data->lock);
 	if (philo->data->num_philo == 1)
@@ -64,10 +63,10 @@ void	*day(void *arg)
 	{
 		if (eat(philo))
 			break ;
-		if (time_to_sleep(philo))
+		if (went_to_bed(philo))
 			break ;
 		if (!the_end(philo))
-			printf("is thinking");
+			document_moment(philo, "is thinking", 0);
 		else
 			break ;
 	}
@@ -91,6 +90,6 @@ void	create_simulation(t_data *data)
 		i++;
 	}
 	data->start = what_time();
-	data->start = 1;
+	data->running = 1;
 	pthread_mutex_unlock(&data->lock);
 }

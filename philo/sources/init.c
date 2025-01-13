@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 15:29:27 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/09 11:01:45 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_data	*init_data(int num, char **args)
 	data->time_death = str_to_int(args[2]);
 	data->time_eat = str_to_int(args[3]);
 	data->time_sleep = str_to_int(args[4]);
+
 	if (num == 6)
 		data->meals = str_to_int(args[5]);
 	else

@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:53:29 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 15:52:41 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/13 10:46:25 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data
 	size_t			time_eat;
 	size_t			time_sleep;
 	int				meals;
+	int				full;
 	int				running;
 	size_t			start;
 	t_philo			*philos;
@@ -48,7 +49,7 @@ typedef struct s_data
 	/*actions.c*/
 
 int		eat(t_philo *philo);
-int		time_to_sleep(t_philo *philo);
+int		went_to_bed(t_philo *philo);
 
 	/*cleaners.c*/
 
@@ -66,7 +67,7 @@ t_data	*init_data(int num, char **values);
 
 	/*routine.c*/
 
-void	cycle_of_extistence(t_data *data);
+void	cycle_of_existence(t_data *data);
 
 	/*simulation.c*/
 

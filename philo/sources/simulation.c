@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:22:23 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 15:52:32 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/13 10:51:58 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	starving_philo(t_data *data)
 	while (i < data->num_philo)
 	{
 		pthread_mutex_lock(&data->lock);
-		if (data->running  == 0)
+		if (data->running  == 1)
 		{
 			time = what_time() - data->start;
-			if (time - data->philos[i].last_meal > data->time_eat)
+			if (time - data->philos[i].last_meal > data->time_death)
 			{
 				pthread_mutex_unlock(&data->lock);
 				document_moment(&data->philos[i], "died", 1);
@@ -39,15 +39,26 @@ int	starving_philo(t_data *data)
 
 int	end_of_cycle(t_data *data)
 {
-	// int	philos;
-	// int	meals;
+	int	philos;
+	int	full;
 
 	if (starving_philo(data))
 		return (1);
+	pthread_mutex_lock(&data->lock);
+	philos = data->num_philo;
+	full =	data->full;
+	pthread_mutex_unlock(&data->lock);
+	if (philos == full)
+	{
+		pthread_mutex_lock(&data->lock);
+		data->running = 0;
+		pthread_mutex_unlock(&data->lock);
+		return (1);
+	}
 	return (0);
 }
 
-void	cycle_of_extistence(t_data *data)
+void	cycle_of_existence(t_data *data)
 {
 	while (1)
 	{
