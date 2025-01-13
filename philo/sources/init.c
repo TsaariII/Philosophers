@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/13 11:02:09 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:11:48 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	the_philo(t_data *data, t_philo *philo, int chair)
 {
 	philo->data = data;
-	philo->l_fork = data->forks[chair];
-	philo->r_fork = data->forks[(chair + 1) % data->num_philo];
+	philo->l_fork = &data->forks[chair];
+	philo->r_fork = &data->forks[(chair + 1) % data->num_philo];
 	philo->id = chair + 1;
 	philo->last_meal = 0;
 	philo->meals = 0;
