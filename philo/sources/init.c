@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/14 11:34:44 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:08:10 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,13 @@ static int	create_philos(t_data *data)
 	data->philos = malloc(sizeof(t_philo) * data->num_philo);
 	if (!data->philos)
 	{
+		while (i > data->num_philo)
+			pthread_mutex_destroy(&data->forks[i++]);
 		free(data->forks);
+		free(data);
 		return (1);
 	}
+	i = 0;
 	while (i < data->num_philo)
 	{
 		the_philo(data, &data->philos[i], i);
