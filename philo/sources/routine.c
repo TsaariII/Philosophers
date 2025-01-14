@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:01:28 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/13 22:39:03 by irychkov         ###   ########.fr       */
+/*   Updated: 2025/01/14 10:15:37 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	no_fork(t_philo *philo)
 	if (philo->id % 2 == 0)
 	{
 		document_moment(philo, "is thinking", 0);
-		standby_of_reason(philo, philo->data->time_eat / 2); //Why do you send only one philo to wait?
+		standby_of_reason(philo, philo->data->time_eat / 2);
 	}
 }
 

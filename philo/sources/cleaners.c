@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:38:10 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 14:50:50 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:18:41 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	cleaner(t_data *data)
 		pthread_mutex_destroy(&data->forks[i++]);
 	free(data->forks);
 	free(data->philos);
+	free(data);
 }
