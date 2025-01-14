@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:26:07 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/13 18:11:48 by irychkov         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:34:44 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	the_philo(t_data *data, t_philo *philo, int chair)
+static void	the_philo(t_data *data, t_philo *philo, int chair)
 {
 	philo->data = data;
 	philo->l_fork = &data->forks[chair];
@@ -22,12 +22,11 @@ void	the_philo(t_data *data, t_philo *philo, int chair)
 	philo->meals = 0;
 }
 
-int	create_philos(t_data *data)
+static int	create_philos(t_data *data)
 {
 	int	i;
 
 	i = 0;
-
 	data->philos = malloc(sizeof(t_philo) * data->num_philo);
 	if (!data->philos)
 	{
@@ -42,7 +41,7 @@ int	create_philos(t_data *data)
 	return (0);
 }
 
-int	set_the_table(t_data *data)
+static int	set_the_table(t_data *data)
 {
 	int	i;
 
@@ -69,7 +68,7 @@ int	set_the_table(t_data *data)
 	return (0);
 }
 
-int	missing_value(t_data *data, int num)
+static int	missing_value(t_data *data, int num)
 {
 	if (data->num_philo == 0 || data->time_death == 0 || data->time_eat == 0
 		|| data->time_sleep == 0)

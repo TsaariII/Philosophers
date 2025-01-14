@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:23:04 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/13 18:46:34 by irychkov         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:32:42 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	take_forks(t_philo *philo)
 	return (0);
 }
 
-void	is_this_enough(t_philo *philo)
+static void	is_this_enough(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->lock);
 	if (philo->meals == philo->data->meals)
@@ -60,7 +60,7 @@ int	eat(t_philo *philo)
 	return (0);
 }
 
-int went_to_bed(t_philo *philo)
+int	went_to_bed(t_philo *philo)
 {
 	if (the_end(philo))
 		return (1);

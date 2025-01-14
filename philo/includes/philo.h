@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:53:29 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/13 18:15:46 by irychkov         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:35:57 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	struct s_data	*data;
-} t_philo;
+}	t_philo;
 
 typedef struct s_data
 {
@@ -65,14 +65,14 @@ int		the_end(t_philo *philo);
 
 t_data	*init_data(int num, char **values);
 
-	/*routine.c*/
-
-void	cycle_of_existence(t_data *data);
-
-	/*simulation.c*/
+	/*rourtine.c*/
 
 void	create_simulation(t_data *data);
 int		standby_of_reason(t_philo *philo, size_t ms);
+
+	/*simulation.c*/
+
+void	cycle_of_existence(t_data *data);
 
 	/*utils.c*/
 

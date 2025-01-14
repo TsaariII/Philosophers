@@ -6,21 +6,11 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 10:31:01 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/08 15:21:31 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:34:06 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-size_t	ft_strlen(char *str)
-{
-	int	len;
-
-	len = 0;
-	while(str[len])
-		len++;
-	return (len);
-}
 
 void	informer(void)
 {

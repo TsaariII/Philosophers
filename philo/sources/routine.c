@@ -6,13 +6,13 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:01:28 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/14 10:15:37 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:37:51 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int standby_of_reason(t_philo *philo, size_t ms)
+int	standby_of_reason(t_philo *philo, size_t ms)
 {
 	size_t	time;
 
@@ -26,7 +26,7 @@ int standby_of_reason(t_philo *philo, size_t ms)
 	return (0);
 }
 
-void	no_fork(t_philo *philo)
+static void	no_fork(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
@@ -37,7 +37,7 @@ void	no_fork(t_philo *philo)
 
 void	just_one(t_philo *philo)
 {
-	size_t time;
+	size_t	time;
 
 	pthread_mutex_lock(philo->l_fork);
 	time = philo->data->start;
@@ -81,7 +81,8 @@ void	create_simulation(t_data *data)
 	i = 0;
 	while (i < data->num_philo)
 	{
-		if (pthread_create(&data->philos[i].thread, NULL, &day, (void *)&data->philos[i]))
+		if (pthread_create(&data->philos[i].thread, NULL, &day,
+				(void *)&data->philos[i]))
 		{
 			unite_in_peace(data);
 			cleaner(data);

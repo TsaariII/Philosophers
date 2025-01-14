@@ -6,13 +6,13 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:22:23 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/13 10:51:58 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:36:52 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	starving_philo(t_data *data)
+static int	starving_philo(t_data *data)
 {
 	size_t	time;
 	int		i;
@@ -21,7 +21,7 @@ int	starving_philo(t_data *data)
 	while (i < data->num_philo)
 	{
 		pthread_mutex_lock(&data->lock);
-		if (data->running  == 1)
+		if (data->running == 1)
 		{
 			time = what_time() - data->start;
 			if (time - data->philos[i].last_meal > data->time_death)
@@ -37,7 +37,7 @@ int	starving_philo(t_data *data)
 	return (0);
 }
 
-int	end_of_cycle(t_data *data)
+static int	end_of_cycle(t_data *data)
 {
 	int	philos;
 	int	full;
@@ -46,7 +46,7 @@ int	end_of_cycle(t_data *data)
 		return (1);
 	pthread_mutex_lock(&data->lock);
 	philos = data->num_philo;
-	full =	data->full;
+	full = data->full;
 	pthread_mutex_unlock(&data->lock);
 	if (philos == full)
 	{

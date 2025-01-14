@@ -6,7 +6,7 @@
 /*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 09:51:26 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/14 11:18:29 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:28:39 by nzharkev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ int	main(int argc, char **argv)
 	cycle_of_existence(data);
 	return (0);
 }
-
