@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nzharkev <nzharkev@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: irychkov <irychkov@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:01:28 by nzharkev          #+#    #+#             */
-/*   Updated: 2025/01/13 13:11:48 by nzharkev         ###   ########.fr       */
+/*   Updated: 2025/01/13 22:39:03 by irychkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	no_fork(t_philo *philo)
 	if (philo->id % 2 == 0)
 	{
 		document_moment(philo, "is thinking", 0);
-		standby_of_reason(&philo->data->philos[0], philo->data->time_eat / 2);
+		standby_of_reason(philo, philo->data->time_eat / 2); //Why do you send only one philo to wait?
 	}
 }
 
@@ -39,11 +39,11 @@ void	just_one(t_philo *philo)
 {
 	size_t time;
 
-	pthread_mutex_lock(&philo->l_fork);
+	pthread_mutex_lock(philo->l_fork);
 	time = philo->data->start;
 	printf("%zu %d has taken a fork\n", what_time() - time, 1);
 	standby_of_reason(&philo->data->philos[0], philo->data->time_death);
-	pthread_mutex_unlock(&philo->l_fork);
+	pthread_mutex_unlock(philo->l_fork);
 }
 
 void	*day(void *arg)
